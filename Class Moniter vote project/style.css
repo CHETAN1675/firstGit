@@ -1,0 +1,44 @@
+   body {
+      background-color: #003366; 
+      color: rgb(80, 28, 169);
+      font-family: Arial, sans-serif;
+    }
+
+    .box {
+      background-color: #add8e6; 
+      width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #003366;
+    }
+
+    label, select, input, button {
+      display: block;
+      margin: 10px 0;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #003366;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .totals {
+      margin-top: 20px;
+      background-color: white;
+      color: #003366;
+      padding: 10px;
+      border-radius: 5px;
+    }

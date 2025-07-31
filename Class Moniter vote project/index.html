@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Class Monitor Vote</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Load Axios from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+<div class="box">
+  <h1>Class Monitor Vote</h1>
+  <h2>Total Votes: <span id="totalVotes">0</span></h2>
+
+  <label>Student Name:</label>
+  <input type="text" id="studentName">
+
+  <label>Choose Monitor:</label>
+  <select id="monitorSelect">
+    <option value="Suresh">Suresh</option>
+    <option value="Deepank">Deepank</option>
+    <option value="Abhik">Abhik</option>
+  </select>
+
+  <button onclick="submitVote()">Submit Vote</button>
+
+  <div class="totals">
+    <p>Suresh Votes: <span id="sureshVotes">0</span></p>
+    <p>Deepank Votes: <span id="deepankVotes">0</span></p>
+    <p>Abhik Votes: <span id="abhikVotes">0</span></p>
+  </div>
+</div>
+
+<script src="index.js"></script>
+
+</body>
+</html>

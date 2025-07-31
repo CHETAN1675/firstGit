@@ -6,7 +6,7 @@ function handleFormSubmit(event) {
     phone: event.target.phone.value,
   };
   axios
-    .post(
+    .get(
       "https://crudcrud.com/api/fbba33b2a5244c3db4f8dd520c8d426c/appointmentData",
       userDetails
     )
