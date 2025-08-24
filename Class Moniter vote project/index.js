@@ -1,10 +1,16 @@
-const apiURL = "https://crudcrud.com/api/e214796ca8b846a181b3992544c298f9/votes";
+const apiURL = "https://crudcrud.com/api/652a7df0345c49d4937fc2d173559336/votes";
 
   let voteCounts = {
     Suresh: 0,
     Deepank: 0,
     Abhik: 0
   };
+
+  function clearLists(){
+    document.getElementById("sureshList").innerHTML="";
+     document.getElementById("deepankList").innerHTML="";
+      document.getElementById("abhikList").innerHTML="";
+  }
 
   function updateDisplay() {
     document.getElementById("sureshVotes").textContent = voteCounts.Suresh;
@@ -14,24 +20,47 @@ const apiURL = "https://crudcrud.com/api/e214796ca8b846a181b3992544c298f9/votes"
     document.getElementById("totalVotes").textContent = total;
   }
 
+  function displayCurrentVotes(votes){
+    clearLists();
+    voteCounts = {Suresh:0,Deepank:0,Abhik:0}
+
+    votes.forEach(function(vote){
+      const monitor = vote.monitor;
+      const student = vote.student;
+      const id = vote._id;
+
+      if(monitor in voteCounts){
+        voteCounts[monitor]++;
+        
+        const li = document.createElement("li");
+        li.textContent = student;
+
+        const deleteBtn = document.createElement("button")
+        deleteBtn.textContent="Delete";
+       deleteBtn.onclick= function(){
+        deleteVote(id);
+       };
+
+       li.appendChild(deleteBtn);
+
+       document.getElementById(`${monitor.toLowerCase()}List`).appendChild(li);
+      }
+    });
+
+    updateDisplay();
+  }
+
   function loadVotes() {
     axios.get(apiURL)
       .then(function(response) {
-        const votes = response.data;
-        voteCounts = { Suresh: 0, Deepank: 0, Abhik: 0 };
-        votes.forEach(function(vote) {
-          if (vote.monitor in voteCounts) {
-            voteCounts[vote.monitor]++;
-          }
-        });
-        updateDisplay();
-      })
+        displayCurrentVotes(response.data);
+        })
       .catch(function(error) {
         console.error("Error loading votes:", error);
       });
   }
 
-  function submitVote() {
+  async function submitVote() {
     const name = document.getElementById("studentName").value;
     const monitor = document.getElementById("monitorSelect").value;
 
@@ -45,16 +74,27 @@ const apiURL = "https://crudcrud.com/api/e214796ca8b846a181b3992544c298f9/votes"
       monitor: monitor
     };
 
-    axios.post(apiURL, vote)
-      .then(function() {
-        voteCounts[monitor]++;
-        updateDisplay();
+   await axios.post(apiURL, vote)
+     try {
+      
+      loadVotes();
         document.getElementById("studentName").value = "";
-      })
-      .catch(function(error) {
+     }
+    
+     catch(error) {
         console.error("Error submitting vote:", error);
-      });
+      };
+    
   }
 
+    function deleteVote(id){
+      axios.delete(`${apiURL}/${id}`)
+      .then(function(){
+        loadVotes();
+      })
+      .catch(function(error){
+        console.error("Error deleting vote:",error);
+      });
+    }
   // Load votes when the page starts
   window.onload = loadVotes;

@@ -12,7 +12,7 @@
       border-radius: 10px;
     }
 
-    }
+    
 
     h1, h2 {
       text-align: center;
@@ -37,8 +37,29 @@
 
     .totals {
       margin-top: 20px;
-      background-color: white;
-      color: #003366;
+      background-color: #003366;
+      color: hsl(184, 21%, 87%);
       padding: 10px;
       border-radius: 5px;
+    }
+
+    ul {
+list-style: none;
+padding-left: 0;
+    }
+
+    li{
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    li button{
+      margin-left: 10px;
+      background-color: tomato;
+      color: white;
+      border-radius: 3px;
+      padding: 3px 6px;
+      width:auto
+      
     }
